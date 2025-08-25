@@ -215,6 +215,10 @@ class SettingsContainer(context: Context, inputView: InputView) : BaseContainer(
                 keyboardValue = InputModeSwitcherManager.MASK_SKB_LAYOUT_QWERTY_PINYIN
                 CustomConstant.SCHEMA_ZH_DOUBLE_FLYPY + AppPrefs.getInstance().input.doublePYSchemaMode.getValue()
             }
+            SkbMenuMode.Wubi26 -> {
+                keyboardValue = InputModeSwitcherManager.MASK_SKB_LAYOUT_QWERTY_PINYIN
+                CustomConstant.SCHEMA_ZH_WUBI + AppPrefs.getInstance().input.wubiSchemaMode.getValue()
+            }
             else ->{
                 keyboardValue = InputModeSwitcherManager.MASK_SKB_LAYOUT_T9_PINYIN
                 CustomConstant.SCHEMA_ZH_T9

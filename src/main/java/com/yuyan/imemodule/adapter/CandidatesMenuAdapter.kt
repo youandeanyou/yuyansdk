@@ -1,5 +1,6 @@
 package com.yuyan.imemodule.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
@@ -94,7 +95,7 @@ class CandidatesMenuAdapter(context: Context?) : RecyclerView.Adapter<Candidates
             SkbMenuMode.EmojiInput -> AppPrefs.getInstance().input.emojiInput.getValue()
             SkbMenuMode.OneHanded -> AppPrefs.getInstance().keyboardSetting.oneHandedModSwitch.getValue()
             SkbMenuMode.FlowerTypeface -> CustomConstant.flowerTypeface != FlowerTypefaceMode.Disabled
-            SkbMenuMode.FloatKeyboard -> EnvironmentSingleton.instance.keyboardModeFloat
+            SkbMenuMode.FloatKeyboard -> instance.keyboardModeFloat
             SkbMenuMode.ClipBoard -> (KeyboardManager.instance.currentContainer as? ClipBoardContainer)?.getMenuMode() == SkbMenuMode.ClipBoard
             SkbMenuMode.Phrases -> (KeyboardManager.instance.currentContainer as? ClipBoardContainer)?.getMenuMode() == SkbMenuMode.Phrases
             SkbMenuMode.Emojicon -> (KeyboardManager.instance.currentContainer as? SymbolContainer)?.getMenuMode() == SymbolMode.Emojicon
@@ -108,6 +109,7 @@ class CandidatesMenuAdapter(context: Context?) : RecyclerView.Adapter<Candidates
             SkbMenuMode.PinyinStroke -> rimeValue == CustomConstant.SCHEMA_ZH_STROKE
             SkbMenuMode.LockClipBoard -> CustomConstant.lockClipBoardEnable
             SkbMenuMode.TextEdit -> InputModeSwitcherManager.isTextEditSkb
+            SkbMenuMode.Wubi26 -> rimeValue.startsWith(CustomConstant.SCHEMA_ZH_WUBI)
             else -> false
         }
         return result
@@ -122,6 +124,7 @@ class CandidatesMenuAdapter(context: Context?) : RecyclerView.Adapter<Candidates
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun notifyChanged() {
         itemHeight = (instance.heightForCandidatesArea * 0.8f).toInt()
         mMenuPadding = (instance.heightForCandidatesArea * 0.05f).toInt()

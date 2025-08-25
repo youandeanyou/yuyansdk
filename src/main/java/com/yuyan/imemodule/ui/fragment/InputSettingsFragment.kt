@@ -8,6 +8,7 @@ import com.yuyan.imemodule.ui.fragment.base.ManagedPreferenceFragment
 import com.yuyan.imemodule.utils.KeyboardLoaderUtil
 import com.yuyan.imemodule.keyboard.KeyboardManager
 import com.yuyan.imemodule.prefs.behavior.SkbMenuMode
+import com.yuyan.imemodule.prefs.behavior.WubiSchemaMode
 import com.yuyan.imemodule.view.preference.ManagedPreference
 import com.yuyan.inputmethod.core.Kernel
 
@@ -16,11 +17,12 @@ class InputSettingsFragment: ManagedPreferenceFragment(AppPrefs.getInstance().in
     private val chineseFanTi = AppPrefs.getInstance().input.chineseFanTi
     private val emojiInput = AppPrefs.getInstance().input.emojiInput
     private val doublePYSchemaMode = AppPrefs.getInstance().input.doublePYSchemaMode
+    private val wubiSchemaMode = AppPrefs.getInstance().input.wubiSchemaMode
 
     private val switchKeyListener = ManagedPreference.OnChangeListener<Boolean> { _, _ ->
         Kernel.nativeUpdateImeOption()
     }
-    private val schemaModeListener = ManagedPreference.OnChangeListener<DoublePinyinSchemaMode> { _, doublePYSchemaMode ->
+    private val doublePYSchemaModeListener = ManagedPreference.OnChangeListener<DoublePinyinSchemaMode> { _, doublePYSchemaMode ->
         val doublePYSchema = CustomConstant.SCHEMA_ZH_DOUBLE_FLYPY + doublePYSchemaMode
         val inputMode = InputModeSwitcherManager.MASK_SKB_LAYOUT_QWERTY_PINYIN or InputModeSwitcherManager.MASK_LANGUAGE_CN or InputModeSwitcherManager.MASK_CASE_UPPER
         AppPrefs.getInstance().internal.inputMethodPinyinMode.setValue(inputMode)
@@ -32,18 +34,32 @@ class InputSettingsFragment: ManagedPreferenceFragment(AppPrefs.getInstance().in
         InputModeSwitcherManager.saveInputMode(inputMode)
         KeyboardManager.instance.switchKeyboard(InputModeSwitcherManager.skbImeLayout)
     }
+    private val wubiSchemaModeListener = ManagedPreference.OnChangeListener<WubiSchemaMode> { _, wubiSchemaMode ->
+        val wubiSchema = CustomConstant.SCHEMA_ZH_WUBI + wubiSchemaMode
+        val inputMode = InputModeSwitcherManager.MASK_SKB_LAYOUT_QWERTY_PINYIN or InputModeSwitcherManager.MASK_LANGUAGE_CN or InputModeSwitcherManager.MASK_CASE_UPPER
+        AppPrefs.getInstance().internal.inputMethodPinyinMode.setValue(inputMode)
+        AppPrefs.getInstance().internal.pinyinModeRime.setValue(wubiSchema)
+        Kernel.initImeSchema(wubiSchema)
+        // 双拼辅助功能,需刷新键盘
+        KeyboardLoaderUtil.instance.clearKeyboardMap()
+        KeyboardManager.instance.clearKeyboard()
+        InputModeSwitcherManager.saveInputMode(inputMode)
+        KeyboardManager.instance.switchKeyboard(InputModeSwitcherManager.skbImeLayout)
+    }
 
     override fun onStart() {
         super.onStart()
         chineseFanTi.registerOnChangeListener(switchKeyListener)
         emojiInput.registerOnChangeListener(switchKeyListener)
-        doublePYSchemaMode.registerOnChangeListener(schemaModeListener)
+        doublePYSchemaMode.registerOnChangeListener(doublePYSchemaModeListener)
+        wubiSchemaMode.registerOnChangeListener(wubiSchemaModeListener)
     }
 
     override fun onStop() {
         super.onStop()
         chineseFanTi.unregisterOnChangeListener(switchKeyListener)
         emojiInput.unregisterOnChangeListener(switchKeyListener)
-        doublePYSchemaMode.unregisterOnChangeListener(schemaModeListener)
+        doublePYSchemaMode.unregisterOnChangeListener(doublePYSchemaModeListener)
+        wubiSchemaMode.unregisterOnChangeListener(wubiSchemaModeListener)
     }
 }

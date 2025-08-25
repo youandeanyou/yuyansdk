@@ -158,6 +158,12 @@
     <string name="double_pinyin_sougou">搜狗双拼</string>
     <string name="double_pinyin_ziguang">紫光双拼</string>
 
+    <string name="wubi_schema_mode">五笔方案</string>
+    <string name="wubi_86">86五笔</string>
+    <string name="wubi_98">98五笔</string>
+    <string name="wubi_03">新世纪五笔</string>
+    <string name="wubi_tiger">虎码五笔</string>
+
     <string name="keyboard_name_pinyin_lx_17">乱序17</string>
     <string name="keyboard_iv_menu_close">关闭键盘</string>
     <string name="space_swipe_move_cursor">滑动空格键移动光标</string>
