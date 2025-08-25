@@ -196,27 +196,27 @@ class SettingsContainer(context: Context, inputView: InputView) : BaseContainer(
         val keyboardValue: Int
         val value = when (data.skbMenuMode) {
             SkbMenuMode.Pinyin26Jian -> {
-                keyboardValue = 0x1000
+                keyboardValue = InputModeSwitcherManager.MASK_SKB_LAYOUT_QWERTY_PINYIN
                 CustomConstant.SCHEMA_ZH_QWERTY
             }
             SkbMenuMode.PinyinHandWriting -> {
-                keyboardValue = 0x3000
+                keyboardValue = InputModeSwitcherManager.MASK_SKB_LAYOUT_HANDWRITING
                 CustomConstant.SCHEMA_ZH_HANDWRITING
             }
             SkbMenuMode.PinyinLx17 -> {
-                keyboardValue = 0x6000
+                keyboardValue = InputModeSwitcherManager.MASK_SKB_LAYOUT_LX17
                 CustomConstant.SCHEMA_ZH_DOUBLE_LX17
             }
             SkbMenuMode.PinyinStroke -> {
-                keyboardValue = 0x7000
+                keyboardValue = InputModeSwitcherManager.MASK_SKB_LAYOUT_STROKE
                 CustomConstant.SCHEMA_ZH_STROKE
             }
             SkbMenuMode.Pinyin26Double -> {
-                keyboardValue = 0x1000
+                keyboardValue = InputModeSwitcherManager.MASK_SKB_LAYOUT_QWERTY_PINYIN
                 CustomConstant.SCHEMA_ZH_DOUBLE_FLYPY + AppPrefs.getInstance().input.doublePYSchemaMode.getValue()
             }
             else ->{
-                keyboardValue = 0x2000
+                keyboardValue = InputModeSwitcherManager.MASK_SKB_LAYOUT_T9_PINYIN
                 CustomConstant.SCHEMA_ZH_T9
             }
         }

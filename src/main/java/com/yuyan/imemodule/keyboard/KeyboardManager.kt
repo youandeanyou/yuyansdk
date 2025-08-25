@@ -41,12 +41,12 @@ class KeyboardManager {
 
     fun switchKeyboard(layout: Int = InputModeSwitcherManager.skbLayout) {
         val keyboardName = when (layout) {
-            0x1000 -> KeyboardType.QWERTY
-            0x4000 -> KeyboardType.QWERTYABC
-            0x3000 -> KeyboardType.HANDWRITING
-            0x5000 -> KeyboardType.NUMBER
-            0x6000 -> KeyboardType.LX17
-            0x8000 -> KeyboardType.TEXTEDIT
+            InputModeSwitcherManager.MASK_SKB_LAYOUT_QWERTY_PINYIN -> KeyboardType.QWERTY
+            InputModeSwitcherManager.MASK_SKB_LAYOUT_QWERTY_ABC -> KeyboardType.QWERTYABC
+            InputModeSwitcherManager.MASK_SKB_LAYOUT_HANDWRITING -> KeyboardType.HANDWRITING
+            InputModeSwitcherManager.MASK_SKB_LAYOUT_NUMBER -> KeyboardType.NUMBER
+            InputModeSwitcherManager.MASK_SKB_LAYOUT_LX17 -> KeyboardType.LX17
+            InputModeSwitcherManager.MASK_SKB_LAYOUT_TEXTEDIT -> KeyboardType.TEXTEDIT
             else -> KeyboardType.T9
         }
         switchKeyboard(keyboardName)
