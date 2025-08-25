@@ -24,6 +24,7 @@ import com.yuyan.imemodule.utils.KeyboardLoaderUtil
 import com.yuyan.imemodule.keyboard.InputView
 import com.yuyan.imemodule.keyboard.KeyboardManager
 import com.yuyan.imemodule.manager.layout.CustomGridLayoutManager
+import com.yuyan.imemodule.prefs.behavior.WubiSchemaMode
 import splitties.dimensions.dp
 import java.util.Collections
 import java.util.LinkedList
@@ -130,7 +131,7 @@ class SettingsContainer(context: Context, inputView: InputView) : BaseContainer(
     /**
      * 弹出键盘界面
      */
-    fun showSkbSelelctModeView() {
+    fun showSkbSelectModeView() {
         val funItems: MutableList<SkbFunItem> = LinkedList()
         funItems.add(
             SkbFunItem(
@@ -183,6 +184,20 @@ class SettingsContainer(context: Context, inputView: InputView) : BaseContainer(
                 mContext.getString(R.string.keyboard_name_stroke),
                 R.drawable.selece_input_mode_stroke,
                 SkbMenuMode.PinyinStroke
+            )
+        )
+        val wubiSchemaMode = AppPrefs.getInstance().input.wubiSchemaMode.getValue()
+        val wubiSchemaName = when(wubiSchemaMode) {
+            WubiSchemaMode.xinshiji -> R.string.wubi_03
+            WubiSchemaMode.wb86 -> R.string.wubi_86
+            WubiSchemaMode.wb98 -> R.string.wubi_98
+            WubiSchemaMode.tiger -> R.string.wubi_tiger
+        }
+        funItems.add(
+            SkbFunItem(
+                mContext.getString(wubiSchemaName),
+                R.drawable.selece_input_mode_py26,
+                SkbMenuMode.Pinyin26Jian
             )
         )
         val adapter = MenuAdapter(context, funItems)

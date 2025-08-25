@@ -3,10 +3,10 @@ package com.yuyan.imemodule.prefs.behavior
 import com.yuyan.imemodule.view.preference.ManagedPreference
 
 enum class WubiSchemaMode {
-    WB_86,
-    WB_98,
-    WB_03,
-    WB_TIGER,
+    wb86,
+    wb98,
+    xinshiji,
+    tiger,
     ;
 
     companion object : ManagedPreference.StringLikeCodec<WubiSchemaMode> {

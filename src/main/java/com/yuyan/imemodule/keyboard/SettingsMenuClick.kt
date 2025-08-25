@@ -31,7 +31,7 @@ fun onSettingsMenuClick(inputView: InputView, skbMenuMode: SkbMenuMode) {
         }
         SkbMenuMode.SwitchKeyboard -> {
             KeyboardManager.instance.switchKeyboard(KeyboardManager.KeyboardType.SETTINGS)
-            (KeyboardManager.instance.currentContainer as? SettingsContainer)?.showSkbSelelctModeView()
+            (KeyboardManager.instance.currentContainer as? SettingsContainer)?.showSkbSelectModeView()
         }
         SkbMenuMode.KeyboardHeight -> {
             KeyboardManager.instance.switchKeyboard()
