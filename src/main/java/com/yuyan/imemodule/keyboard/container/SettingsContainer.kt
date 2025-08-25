@@ -197,7 +197,7 @@ class SettingsContainer(context: Context, inputView: InputView) : BaseContainer(
             SkbFunItem(
                 mContext.getString(wubiSchemaName),
                 R.drawable.selece_input_mode_py26,
-                SkbMenuMode.Pinyin26Jian
+                SkbMenuMode.Wubi26
             )
         )
         val adapter = MenuAdapter(context, funItems)
